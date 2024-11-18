@@ -228,7 +228,12 @@ void Trainer::printStats() const
 // Returns: none
 // Purpose: Adds a pokemon to the trainer's pokemon inventory.
 // -------------------------------------------------
-
+void Trainer::addPokemon(const string pokemonName)
+{
+	numPokemon = 1;
+	string currPokemon = pokemonName;
+	pokemon[0] = currPokemon;
+}
 
 
 // -------------------------------------------------
@@ -237,6 +242,25 @@ void Trainer::printStats() const
 // Returns: bool, whether or not the item could be added
 // Purpose: If the trainer has space, add an item. Otherwise don't.
 // -------------------------------------------------
+bool Trainer::addItem(const int index)
+{
+	// Check if the index is allowed
+    if (index < 0 || index >= INVENTORY_MAX) 
+	{
+        cout << "Invalid item index." << endl;
+        return false;
+	}
+	//see if theres room for the item to be added
+	else if(inventory[index] >= ITEM_MAX)
+	{
+		cout << "You cannot carry any more of this item.\n";
+		return false;
+	}
 
+	//adding item
+	inventory[index]++;
+	cout << "Item added to inventory!\n";
+	return true;
+}
 
 

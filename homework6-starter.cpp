@@ -57,6 +57,8 @@ void readFile(const string pokemonList[WILD_POKEMON_LIST_SIZE], const string fil
     {
         cout << filename << " opening failed.\n";
     } 
+	else
+	cout << "Opening file success!\n";
 }
 
 int main() 
@@ -87,18 +89,18 @@ int main()
 	misty2.printStats();
 
 	cout << "Testing setName()..." << endl;
-	// player.setName("Ash");
-	// player.printStats();
+	player.setName("Ash");
+	player.printStats();
 
 	cout << "Testing addPokemon()..." << endl;
-	// player.addPokemon("Pikachu");
-	// player.printStats();
+	player.addPokemon("Pikachu");
+	player.printStats();
 
 	cout << "Testing addItem()..." << endl;
-	// player.addItem(Trainer::POKE_BALL);
-	// player.addItem(Trainer::ULTRA_BALL);
-	// player.addItem(Trainer::REVIVE);
-	// player.printStats();
+	player.addItem(Trainer::POKE_BALL);
+	player.addItem(Trainer::ULTRA_BALL);
+	player.addItem(Trainer::REVIVE);
+	player.printStats();
 
 	cout << "Testing generateEncounter()..." << endl;
 	// generateEncounter(pokemonList, wildPokemon, item);

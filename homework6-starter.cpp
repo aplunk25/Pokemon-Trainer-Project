@@ -1,8 +1,8 @@
 /******************************************************************************
 Fall 2024 Programming Foundations I
 Author: Alex Plunk
-Date: November 17, 2024
-Purpose: 
+Date: November 15, 2024
+Purpose: main function and compiling the program
 *******************************************************************************/
 
 #include "Trainer.h"
@@ -48,18 +48,31 @@ void generateEncounter(string pokeList[], string &encounteredPokemon, string &pi
 			pickedUpItem = "Poke Ball";
 	}
 }
-string filename = "PokemonList.txt";
-void readFile(const string pokemonList[WILD_POKEMON_LIST_SIZE], const string filename)
+void readFile(string pokeList[], const string filename)
 {
+	string Pokemon;
+	int index = 0;
+	//step 1
 	ifstream din;
+	//step 2 
 	din.open("PokemonList.txt");
+	//step 3 
 	if(din.fail())
     {
         cout << filename << " opening failed.\n";
     } 
 	else
+	//step 4 
+	while(din >> Pokemon)
+		{
+			pokeList[index] = Pokemon;
+			index++;
+		}
 	cout << "Opening file success!\n";
+	//step 5
+	din.close();
 }
+
 
 int main() 
 {
@@ -71,6 +84,8 @@ int main()
 	int itemIndex = 0;
 	string currPokemon = "";
 	string pokemonList[WILD_POKEMON_LIST_SIZE];
+
+	
 
 	//uncomment each of the tests as you finish writing the code in Trainer.cpp
 	cout << "Testing readFile()...\n" << endl;
@@ -103,10 +118,10 @@ int main()
 	player.printStats();
 
 	cout << "Testing generateEncounter()..." << endl;
-	// generateEncounter(pokemonList, wildPokemon, item);
-	// cout << "wildPokemon: " << wildPokemon << endl;
-	// cout << "item: " << item << endl;
-	// cout << endl;
+	generateEncounter(pokemonList, wildPokemon, item);
+	cout << "wildPokemon: " << wildPokemon << endl;
+	cout << "item: " << item << endl;
+	cout << endl;
 
 	cout << "Testing generateEncounter()..." << endl;
 	// generateEncounter(pokemonList, wildPokemon, item);
@@ -118,15 +133,25 @@ int main()
 	while(stillPlaying)
 	{
 		//generate an encounter to get the random item and the wild Pokemon
+		generateEncounter(pokemonList, wildPokemon, item);
 		
 		
 		
 		//fulfill item encounter
+		cout << "You found a(n) " << item << ", do you want to keep it? y/n\n";
+		if(charInputCheck() == 'y')
+			if(item == "Revive")
+				player.addItem(Trainer::REVIVE);
+			else if(item == "Poke Ball")
+				player.addItem(Trainer::POKE_BALL);
+			else if(item == "Ultra Ball")
+				player.addItem(Trainer::ULTRA_BALL);
+			
 
 
 
 		//print stats
-		
+		player.printStats();
 		
 
 		//generate steps
@@ -140,7 +165,13 @@ int main()
 		}
 
 		//fulfill Pokemon encounter
-		
+		int index = 0;
+		cout << "You've encountered a(n) " << wildPokemon << ", would you like to fight it? y/n\n";
+		if(charInputCheck() == 'y')
+			cout << "Which Pokemon do you want to use?\n";
+			for(int i = 0; i < player.getPokemon(index))
+
+
 		
 		
 		

@@ -1,7 +1,7 @@
 /******************************************************************************
 Fall 2024 Programming Foundations I
-Author: STUDENT NAME
-Date: November ???, 2024
+Author: Alex Plunk
+Date: November 15, 2024
 Purpose: Define the Trainer class
 *******************************************************************************/
 

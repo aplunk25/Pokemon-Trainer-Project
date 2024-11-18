@@ -126,7 +126,7 @@ int Trainer::getNumPokemon() const
 
 int Trainer::getItemAmount(const int index) const
 {
-	return inventory[INVENTORY_MAX];
+	return inventory[index];
 }
 
 
@@ -138,7 +138,7 @@ int Trainer::getItemAmount(const int index) const
 // -------------------------------------------------
 string Trainer::getPokemon(const int index) const
 {
-	return pokemon[POKEMON_MAX];
+	return pokemon[index];
 }
 
 
@@ -164,7 +164,13 @@ void Trainer::setName(const string userName)
 
 void Trainer::useItem(const int index)
 {
-	// for(int i = index; i < );
+	if(inventory[index] > 0 )
+	{
+		inventory[index]--;
+		cout << "You have used a/an " << inventory[index] << endl;
+	}
+	else
+		cout << "You don't have any of that item to use.\n";
 }
 
 // -------------------------------------------------
@@ -175,8 +181,8 @@ void Trainer::useItem(const int index)
 // -------------------------------------------------
 void Trainer::removePokemon(const int index)
 {
-	for(int i = index; i < numPokemon-1; i++)
-		pokemon[i] = pokemon[i+1];
+	for(int index = 0; index < numPokemon-1; index++)
+		pokemon[index] = pokemon[index+1];
 	numPokemon--;
 	pokemon[numPokemon] = "";
 }
@@ -207,7 +213,36 @@ void Trainer::printStats() const
 // Returns: none
 // Purpose: Prints the trainer's stats to a file
 // -------------------------------------------------
+void Trainer::writeFile(const string filename)
+{
+	//step 1
+	ofstream dout;
+	//step 2 
+	dout.open(filename);
+	//step 3
+	if(dout)
+	{
+		cout << "Trainer name = " << name << endl;     //step 4 write data to file 
+		//for loop for pokemon
+		for(int i = 0; i < POKEMON_MAX; i++)
+		{
+			if(pokemon[i] != "empty")
+				{
+					cout << pokemon[i] << endl;
+				}
+		}
+		//for loop for items in inventory
+		for(int i = 0; i < INVENTORY_MAX; i++)
+		{
+			cout << inventory[i] << endl;
+		}
+		//step 5 close the file
+		dout.close();
+	}
+	
 
+
+}
 
 
 
@@ -219,7 +254,13 @@ void Trainer::printStats() const
 // Purpose: Returns true if the trainer has space for another pokemon. Returns false if not.
 // -------------------------------------------------
 
-
+bool Trainer::hasPokemonSpace() const
+{
+	if(numPokemon > POKEMON_MAX)
+		return false; 
+	else
+		return true;
+}
 
 
 // -------------------------------------------------

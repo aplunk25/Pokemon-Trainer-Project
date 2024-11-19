@@ -165,12 +165,7 @@ void Trainer::setName(const string userName)
 void Trainer::useItem(const int index)
 {
 	if(inventory[index] > 0 )
-	{
 		inventory[index]--;
-		cout << "You have used a/an " << inventory[index] << endl;
-	}
-	else
-		cout << "You don't have any of that item to use.\n";
 }
 
 // -------------------------------------------------
@@ -222,24 +217,34 @@ void Trainer::writeFile(const string filename)
 	//step 3
 	if(dout)
 	{
-		cout << "Trainer name = " << name << endl;     //step 4 write data to file 
-		//for loop for pokemon
-		for(int i = 0; i < POKEMON_MAX; i++)
-		{
-			if(pokemon[i] != "empty")
-				{
-					cout << pokemon[i] << endl;
-				}
-		}
-		//for loop for items in inventory
-		for(int i = 0; i < INVENTORY_MAX; i++)
-		{
-			cout << inventory[i] << endl;
-		}
+		     //step 4 write data to file
+
+		dout << "Name: " << name << endl;
+	dout << "numPokemon: " << numPokemon << endl;
+	dout << "Inventory: " << endl;
+	dout << "\t(" << inventory[POKE_BALL] << ") Poke Ball(s)" << endl;
+	dout << "\t(" << inventory[ULTRA_BALL] << ") Ultra Ball(s)" << endl;
+	dout << "\t(" << inventory[REVIVE] << ") Revives(s)" << endl;
+	dout << "Pokemon: ";
+	for (int i = 0; i < numPokemon; i++)
+		dout << pokemon[i] << ", ";
+	dout << '\n' << endl; 
+		// //for loop for pokemon
+		// for(int i = 0; i < POKEMON_MAX; i++)
+		// {
+		// 	if(pokemon[i] != "empty")
+		// 		{
+		// 			cout << pokemon[i] << endl;
+		// 		}
+		// }
+		// //for loop for items in inventory
+		// for(int i = 0; i < INVENTORY_MAX; i++)
+		// {
+		// 	cout << inventory[i] << endl;
+		// }
 		//step 5 close the file
-		dout.close();
 	}
-	
+	dout.close();
 
 
 }
@@ -271,9 +276,11 @@ bool Trainer::hasPokemonSpace() const
 // -------------------------------------------------
 void Trainer::addPokemon(const string pokemonName)
 {
-	numPokemon = 1;
-	string currPokemon = pokemonName;
-	pokemon[0] = currPokemon;
+	int i = -1; // set it at -1 for indexing 
+	numPokemon++;
+	// string wildPokemon = pokemonName;
+	pokemon[numPokemon + i] = pokemonName;
+	
 }
 
 
